@@ -13,10 +13,10 @@
 #include <unistd.h>
 #include "libft.h"
 
-char		*ft_strnstr(char *str, char *to_find);
-static char	*find_str(char *str, char *to_find, int i, int j);
+char		*ft_strnstr(char *str, char *to_find, size_t len);
+static char	*find_str(char *str, char *to_find, int i, int j, size_t len);
 
-char	*ft_strstr(char *str, char *to_find)
+char	*ft_strnstr(char *str, char *to_find, size_t len)
 {
 	int	i;
 	int	j;
@@ -25,15 +25,15 @@ char	*ft_strstr(char *str, char *to_find)
 	j = 0;
 	if (!to_find[i])
 		return (str);
-	return (find_str(str, to_find, i, j));
+	return (find_str(str, to_find, i, j, len));
 }
 
-static char	*find_str(char *str, char *to_find, int i, int j)
+static char	*find_str(char *str, char *to_find, int i, int j, size_t len)
 {
 	int	found;
 
 	found = 0;
-	while (str[i] && !found)
+	while (i < ft_strlen(str) && i < len && !found)
 	{
 		j = 0;
 		while (to_find[j])

@@ -16,7 +16,7 @@ int	ft_strncmp(char *s1, char *s2, size_t n);
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	unsigned int	i;
+    size_t	i;
 
 	i = 0;
 	while (*s1 && *s2 && i < n)

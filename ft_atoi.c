@@ -12,26 +12,26 @@
 
 #include "libft.h"
 
-int	ft_atoi(char *str);
+int	ft_atoi(const char *str);
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int	segno;
 	int	numero;
 
 	segno = 1;
 	numero = 0;
-	while (*str <= ' ' || *str == 128)
+	while (ft_isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 		{
 			segno *= -1;
-			str++;
 		}
+		str++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (ft_isdigit(*str))
 	{
 		numero *= 10;
 		numero += *str - '0';

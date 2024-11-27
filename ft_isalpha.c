@@ -12,25 +12,9 @@
 
 #include "libft.h"
 
-int			ft_isalpha(int c);
-static int	isupper(int c);
-static int	islower(int c);
+int ft_isalpha(int c);
 
 int	ft_isalpha(int c)
 {
-	return (isupper(c) || islower(c));
-}
-
-static int	isupper(int c)
-{
-	if (c >= 0x41 && c <= 0x5A)
-		return (c);
-	return (0);
-}
-
-static int	islower(int c)
-{
-	if (c >= 0x61 && c <= 0x7A)
-		return (c);
-	return (0);
+	return (ft_isupper(c) || ft_islower(c));
 }
