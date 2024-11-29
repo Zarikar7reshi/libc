@@ -1,4 +1,4 @@
-int ft_islower(int c);
+int	ft_islower(int c);
 
 int	ft_islower(int c)
 {
