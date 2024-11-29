@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 22:54:54 by sabruma           #+#    #+#             */
+/*   Updated: 2024/11/29 22:54:56 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	ft_strlcpy(char *to, const char *from, size_t size);
@@ -12,7 +24,7 @@ size_t	ft_strlcpy(char *to, const char *from, size_t size)
 	else if (size > ft_strlen(from))
 	{
 		ft_memcpy(to, from, ft_strlen(from));
-		to[ft_strlen(from) + 1] = '\0';
+		to[ft_strlen(from)] = '\0';
 	}
 	return (ft_strlen(from));
 }
