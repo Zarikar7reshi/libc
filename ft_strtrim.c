@@ -12,23 +12,37 @@
 
 #include "libft.h"
 
-char	*ft_strtrim(const char *s1, const char *set);
+static	int	compare(const char *set, char c);
+char		*ft_strtrim(const char *s1, const char *set);
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	const char	*m;
-	char		*t;
+	int		i;
+	int		j;
+	int		len;
+	char	*s2;
 
-	t = s1;
-	while (s1)
+	s2 = (char *)s1 + ft_strlen(s1);
+	i = 0;
+	len = ft_strlen(s1);
+	j = ft_strlen(s1);
+	while (i < len && j > i)
 	{
-		m = set;
-		while (ft_strchr(s1, *m))
-			t = ft_strchr(s1, *m);
-		while (ft_strrchr(s1, *m))
-			t = ft_strrchr(s1, *m);
-		m++;
-		s1++;
+		if (compare(set, *s1++))
+			i++;
+		if (compare(set, *s2--))
+			j--;
 	}
-	return (t);
+	return (ft_substr(s1, i, j));
+}
+
+static int	compare(const char *set, char c)
+{
+	while (set)
+	{
+		if (c == *set)
+			return (1);
+		set++;
+	}
+	return (0);
 }
