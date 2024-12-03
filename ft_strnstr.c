@@ -17,23 +17,24 @@ static void	*ft_memmem(const void *h, size_t hl, const void *n, size_t nl);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	return (ft_memmem(haystack, len, needle, ft_strlen(needle)));
+	if (*needle == '\0')
+		return ((char *)haystack);
+	if (*haystack == '\0')
+		return (NULL);
+	return ((char *)ft_memmem(haystack, len, needle, ft_strlen(needle)));
 }
 
 static void	*ft_memmem(const void *h, size_t hl, const void *n, size_t nl)
 {
 	unsigned char	*c_haystack;
 
-	if (!h || !n)
-		return (NULL);
-	if (hl == 0 || nl == 0)
-		return ((void *)h);
 	c_haystack = (unsigned char *)h;
-	while (hl-- >= nl)
+	while (hl >= nl)
 	{
-		if (!ft_memcmp(c_haystack, n, nl))
-			return (c_haystack);
+		if (ft_memcmp(c_haystack, n, nl) == 0)
+			return ((void *)c_haystack);
 		c_haystack++;
+		hl--;
 	}
 	return (NULL);
 }

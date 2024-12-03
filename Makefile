@@ -2,8 +2,9 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = $(wildcard ft_*.c)
+##BONUS = $(wildcard ft_lst*.c)
 OBJ = $(SRC:.c=.o)
-BUILD_PATH = ~/libft
+##BONUS_OBJ = $(BONUS:.c=.o)
 
 all: $(NAME) clean
 
@@ -14,12 +15,15 @@ $(OBJ): $(SRC)
 	cc -c $^
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(BONUS_OBJ)
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 
-re:
-	fclean all
+re: fclean all
 
-bonus:
+##bonus: $(OBJ_BONUS)
+##	ar rcs $(NAME) $(OBJ_BONUS)
+
+##$(OBJ_BONUS): $(BONUS)
+##	cc -c $^

@@ -17,12 +17,14 @@ size_t	ft_strlcat(char *to, const char *from, size_t size);
 size_t	ft_strlcat(char *to, const char *from, size_t size)
 {
 	size_t	len;
+	size_t	i;
 
-	len = ft_strlen(to);
-	if (size > len)
+	i = 0;
+	while (*to && i < size)
 	{
-		to += len;
-		ft_memmove(to, from, size - len);
+		to++;
+		i++;
 	}
-	return ((size_t)ft_strlen(from) + len);
+	len = ft_strlcpy(to, from, size - i);
+	return (len + i);
 }

@@ -16,15 +16,21 @@ char	*ft_strrchr(const char *string, int c);
 
 char	*ft_strrchr(const char *string, int c)
 {
-	int	i;
+	int			i;
+	const char	*last;
 
-	i = ft_strlen(string) - 1;
-	string += i;
-	while (i--)
+	if ((char)c == '\0')
 	{
-		if (*string == c)
-			return ((char *)string);
-		string--;
+		while (*string)
+			string++;
+		return ((char *)string);
 	}
-	return (NULL);
+	last = NULL;
+	while (*string)
+	{
+		if (*string == (char)c)
+			last = string;
+		string++;
+	}
+	return ((char *)last);
 }

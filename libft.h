@@ -19,14 +19,23 @@
 // win/master -> file pronti per la consegna da copiare in github
 // da github recuperare i file per pusharli su intra
 
-// strdup, strjoin, ft_strdup, fsoares, split, itoa, strrchr, ft_strlcat, strmapi, strncmp, putnbr_fd, ft_split, calloc, 
-// strnstr, ft_strrchr, ft_substr, ft_strnstr, ft_strmapi, ft_putnbr_fd, strtrim, substr, strlcat, ft_itoa, memcpy, ft_strtrim
-
+/*
+ft_putnbr_fd, 
+ft_split, 
+ft_itoa, 
+ft_substr
+ft_trim
+*/
 #include <stddef.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -61,3 +70,12 @@ void	*ft_memmove(void *to, const void *from, size_t size);
 size_t	ft_strlen(const char *__s);
 size_t	ft_strlcat(char *to, const char *from, size_t size);
 size_t	ft_strlcpy(char *to, const char *from, size_t size);
+int		ft_lstsize(t_list *lst);
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstnew(void *content);
+t_list	*ft_lstadd_front(t_list **list, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstadd_back(t_list **list, t_list *new);

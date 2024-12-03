@@ -18,6 +18,8 @@ void	*ft_memcpy(void *to, const void *from, size_t size)
 {
 	void	*saveto;
 
+	if (to == NULL && from == NULL)
+		return (NULL);
 	saveto = to;
 	while (size--)
 		*(unsigned char *)to++ = *(unsigned char *)from++;

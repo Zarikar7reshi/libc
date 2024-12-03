@@ -24,12 +24,12 @@ char	*ft_itoa(int n)
 	sign = 1;
 	len = get_len(n);
 	s = (char *)malloc(len + 1);
+	if (!s)
+		return (NULL);
 	if (n == INT_MIN)
 		return ("-2147483648");
 	if (n < 0)
 		sign = -1;
-	if (!s)
-		return (NULL);
 	if (sign == -1)
 		n = -n;
 	s[len--] = '\0';

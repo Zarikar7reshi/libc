@@ -19,14 +19,17 @@ char	*ft_strmapi(char *s, char (*f)(unsigned int, char))
 	size_t	i;
 	char	*m;
 
+	if (s == NULL)
+		return (NULL);
 	m = (char *)malloc(ft_strlen(s) + 1);
 	if (m == NULL)
 		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s) + 1)
+	while (i < ft_strlen(s))
 	{
 		m[i] = f(i, s[i]);
 		i++;
 	}
+	m[i] = '\0';
 	return (m);
 }
