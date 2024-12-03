@@ -19,13 +19,6 @@
 // win/master -> file pronti per la consegna da copiare in github
 // da github recuperare i file per pusharli su intra
 
-/*
-ft_putnbr_fd, 
-ft_split, 
-ft_itoa, 
-ft_substr
-ft_trim
-*/
 #include <stddef.h>
 #include <unistd.h>
 #include <stdlib.h>

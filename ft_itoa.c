@@ -21,50 +21,48 @@ char	*ft_itoa(int n)
 	int		sign;
 	int		len;
 
+	if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
 	sign = 1;
 	len = get_len(n);
-	s = (char *)malloc(len + 1);
+	s = (char *)ft_calloc(len + 1, 1);
 	if (!s)
 		return (NULL);
-	if (n == INT_MIN)
-		return ("-2147483648");
 	if (n < 0)
-		sign = -1;
-	if (sign == -1)
-		n = -n;
-	s[len--] = '\0';
-	if (n == 0)
-		s[len--] = '0';
-	while (n)
 	{
-		s[len--] = n % 10 + '0';
+		n = -n;
+		sign = -1;
+	}
+	while (len > 0)
+	{
+		s[--len] = n % 10 + '0';
 		n /= 10;
 	}
 	if (sign == -1)
-		s[len] = '-';
+		s[0] = '-';
 	return (s);
 }
 
 static int	get_len(int n)
 {
-	int	sign;
 	int	len;
+	int	sign;
 
-	len = 1;
 	sign = 1;
+	len = 1;
+	if (n == 0)
+		return (1);
 	if (n < 0)
 	{
 		n = -n;
 		sign = -1;
 	}
-	while (n > 9)
+	while (n > 0)
 	{
 		len++;
 		n /= 10;
 	}
-	if (sign)
-	{
+	if (sign == -1)
 		return (len);
-	}
-	return (len + 1);
+	return (len - 1);
 }

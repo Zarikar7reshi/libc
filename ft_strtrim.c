@@ -22,23 +22,28 @@ char	*ft_strtrim(const char *s1, const char *set)
 	int		len;
 	char	*s2;
 
-	s2 = (char *)s1 + ft_strlen(s1);
+	if (!*s1)
+		return (ft_strdup(""));
+	s2 = (char *)s1 + ft_strlen(s1) - 1;
 	i = 0;
 	len = ft_strlen(s1);
-	j = ft_strlen(s1);
-	while (i < len && j > i)
+	j = len;
+	while (compare(set, *s1) && i < len)
 	{
-		if (compare(set, *s1++))
-			i++;
-		if (compare(set, *s2--))
-			j--;
+		i++;
+		s1++;
 	}
-	return (ft_substr(s1, i, j));
+	while (compare(set, *s2) && j >= i)
+	{
+		j--;
+		s2--;
+	}
+	return (ft_substr(s1, 0, j - i));
 }
 
 static int	compare(const char *set, char c)
 {
-	while (set)
+	while (*set != '\0')
 	{
 		if (c == *set)
 			return (1);

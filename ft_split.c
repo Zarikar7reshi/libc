@@ -14,77 +14,87 @@
 #include <stdio.h>
 
 char			**ft_split(const char *s, char c);
-static ssize_t	get_index(const char *s, char c);
-static int		count(char *c_s, char c);
-static char		*split(char *c_s, char c);
+static int		count(const char *s, char c);
+static char		*split(const char *c_s, char c);
+static int		*split_helper(const char **s, char c, char **mx, int *i);
 
 char	**ft_split(const char *s, char c)
 {
-	int		i;
-	char	**mx;
-	char	*c_s;
+	int			i;
+	char		**mx;
 
-	i = count((char *)s, c);
-	mx = (char **)malloc((i + 1) * sizeof(char *));
+	mx = (char **)malloc((count(s, c) + 1) * sizeof(char *));
 	if (mx == NULL)
 		return (NULL);
 	i = 0;
-	c_s = (char *)s;
-	while (i < count((char *)s, c))
+	while (*s)
 	{
-		mx[i] = split(c_s, c);
-		if (!mx[i])
-			while (i--)
-				free(mx[i]);
-		if (ft_strchr(c_s, c))
-			c_s = ft_strchr(c_s, c);
-		i++;
+		while (*s == c)
+			s++;
+		if (!split_helper(&s, c, mx, &i))
+			return (NULL);
 	}
+	mx[i] = NULL;
 	return (mx);
 }
 
-static char	*split(char *c_s, char c)
+static int	*split_helper(const char **s, char c, char **mx, int *i)
 {
-	ssize_t	idx;
-	char	*p;
-
-	idx = get_index(c_s, c);
-	if (idx == -1)
+	if (*s && **s)
 	{
-		p = (char *)malloc(ft_strlen(c_s) + 1);
-		if (!p)
-			return (NULL);
-		ft_strlcpy(p, c_s, ft_strlen(c_s) + 1);
+		mx[*i] = split(*s, c);
+		if (!mx[*i])
+		{
+			while (*i)
+				free(mx[--(*i)]);
+			free(mx);
+			return (0);
+		}
+		*s += ft_strlen(mx[*i]);
+		(*i)++;
 	}
-	else
-		p = ft_substr(c_s, 0, idx);
+	return (1);
+}
+
+static char	*split(const char *c_s, char c)
+{
+	int		len;
+	char	*p;
+	int		idx;
+
+	len = 0;
+	while (c_s[len] != '\0' && c_s[len] != c)
+		len++;
+	p = (char *)malloc(len + 1);
+	if (!p)
+		return (NULL);
+	idx = 0;
+	while (idx < len)
+	{
+		p[idx] = c_s[idx];
+		idx++;
+	}
+	p[idx] = '\0';
 	return (p);
 }
 
-static int	count(char *c_s, char c)
+static int	count(const char *s, char c)
 {
 	int	i;
-
-	i = 1;
-	while (ft_strchr(c_s, c))
-	{
-		c_s = ft_strchr(c_s, c);
-		i++;
-		c_s++;
-	}
-	return (i);
-}
-
-static ssize_t	get_index(const char *s, char c)
-{
-	ssize_t	i;
+	int	n;
 
 	i = 0;
-	while ((size_t)i <= ft_strlen(s))
+	n = 0;
+	while (s[i])
 	{
-		if (s[i] == c)
-			return (i);
-		i++;
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+		{
+			n++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+		}
 	}
-	return (-1);
+	return (n);
 }
