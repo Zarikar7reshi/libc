@@ -16,7 +16,7 @@
 char			**ft_split(const char *s, char c);
 static int		count(const char *s, char c);
 static char		*split(const char *c_s, char c);
-static int		*split_helper(const char **s, char c, char **mx, int *i);
+static int		split_helper(const char **s, char c, char **mx, int *i);
 
 char	**ft_split(const char *s, char c)
 {
@@ -38,7 +38,7 @@ char	**ft_split(const char *s, char c)
 	return (mx);
 }
 
-static int	*split_helper(const char **s, char c, char **mx, int *i)
+static int	split_helper(const char **s, char c, char **mx, int *i)
 {
 	if (*s && **s)
 	{

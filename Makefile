@@ -2,9 +2,9 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = $(wildcard ft_*.c)
-##BONUS = $(wildcard ft_lst*.c)
+BONUS = $(wildcard ft_lst*.c)
 OBJ = $(SRC:.c=.o)
-##BONUS_OBJ = $(BONUS:.c=.o)
+BONUS_OBJ = $(BONUS:.c=.o)
 
 all: $(NAME) clean
 
@@ -22,8 +22,8 @@ fclean: clean
 
 re: fclean all
 
-##bonus: $(OBJ_BONUS)
-##	ar rcs $(NAME) $(OBJ_BONUS)
+bonus: $(OBJ_BONUS)
+	ar rcs $(NAME) $(OBJ_BONUS)
 
-##$(OBJ_BONUS): $(BONUS)
-##	cc -c $^
+$(OBJ_BONUS): $(BONUS)
+	cc -c $^
