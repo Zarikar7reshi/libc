@@ -16,7 +16,6 @@ char	*ft_strrchr(const char *string, int c);
 
 char	*ft_strrchr(const char *string, int c)
 {
-	int			i;
 	const char	*last;
 
 	if ((char)c == '\0')
